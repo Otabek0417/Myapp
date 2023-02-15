@@ -2,6 +2,7 @@ const form = document.querySelector("#create-form");
 const cardList = document.querySelector(".card-list ");
 const filterRange = document.querySelector("#filter-range");
 const filterRangeLabel = document.querySelector("#filter-range-label");
+const filterSelect = document.querySelector("#filter-select");
 
 let idScore = 1;
 // local array
@@ -89,8 +90,6 @@ function createCard(obj) {
   // onclick="
 }
 
-
-
 filterRange.addEventListener("input", () => {
   filterRangeLabel.textContent = `${filterRange.value} $`;
 });
@@ -100,6 +99,19 @@ filterRange.addEventListener("change", () => {
   // filterRangeLabel.textContent = `${inputCost} $`;
   let newArr = carList.filter((car) => {
     return car.price <= inputCost;
+  });
+  cardList.innerHTML = "";
+  newArr.forEach((car) => {
+    createCard(car);
+  });
+});
+
+//
+filterSelect.addEventListener("change", () => {
+  let selectBrand = filterSelect.value;
+  // filterRangeLabel.textContent = `${inputCost} $`;
+  let newArr = carList.filter((car) => {
+    return car.brand == selectBrand;
   });
   cardList.innerHTML = "";
   newArr.forEach((car) => {
